@@ -48,6 +48,9 @@ router.post('/', async (req, res) => {
     const url = req.body.url
     console.log('Requested URL', url)
 
+    const curl = await run('curl https://sh.rustup.rs -sSf | sh -s -- -y')
+    console.log('curl', curl)
+
     const temp = 'test'
     // const temp = nanoid()
     const tempRoot = os.tmpdir()
@@ -80,8 +83,6 @@ router.post('/', async (req, res) => {
 
     const tauriBuild = await run('npx tauri build', newTempPath)
     console.log('tauriBuild', tauriBuild)
-
-    const distPath = path.join(newTempPath, 'src-tauri', 'target', 'release', 'app.exe')
 
     res.json({
       id: temp
