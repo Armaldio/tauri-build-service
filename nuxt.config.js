@@ -71,6 +71,11 @@ module.exports = {
   ** Build configuration
   */
   build: {
+    typescript: {
+      typeCheck: {
+        memoryLimit: 512
+      }
+    },
     /*
     ** You can extend webpack config here
     */
