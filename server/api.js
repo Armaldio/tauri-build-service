@@ -51,6 +51,9 @@ router.post('/', async (req, res) => {
     const curl = await run('curl https://sh.rustup.rs -sSf | sh -s -- -y')
     console.log('curl', curl)
 
+    const source = await run('source $HOME/.cargo/env')
+    console.log('source', source)
+
     const isInstalled = await run('rustc --version')
     console.log('isInstalled', isInstalled)
 
