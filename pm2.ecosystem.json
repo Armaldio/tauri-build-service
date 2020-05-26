@@ -1,0 +1,9 @@
+{
+  "apps": [
+      {
+          "name": "build-service",
+          "script": "npm",
+          "args" : "start"
+      }
+  ]
+}

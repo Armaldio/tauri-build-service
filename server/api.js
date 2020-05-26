@@ -48,16 +48,16 @@ router.post('/', async (req, res) => {
     const url = req.body.url
     console.log('Requested URL', url)
 
-    const curl = await run('curl https://sh.rustup.rs -sSf | sh -s -- -y')
-    console.log('curl', curl)
+    // const curl = await run('curl https://sh.rustup.rs -sSf | sh -s -- -y')
+    // console.log('curl', curl)
 
-    const prefix = '$HOME/.cargo/bin/'
+    // const prefix = '$HOME/.cargo/bin/'
 
-    const isInstalled = await run(`${prefix}rustc --version`)
-    console.log('isInstalled', isInstalled)
+    // const isInstalled = await run(`${prefix}rustc --version`)
+    // console.log('isInstalled', isInstalled)
 
-    const cargoInstall = await run(`${prefix}cargo install tauri-bundler --force`)
-    console.log('cargoInstall', cargoInstall)
+    // const cargoInstall = await run(`${prefix}cargo install tauri-bundler --force`)
+    // console.log('cargoInstall', cargoInstall)
 
     const temp = 'test'
     // const temp = nanoid()
