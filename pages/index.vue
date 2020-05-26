@@ -38,7 +38,8 @@ export default {
         const url = this.url
         const parsed = await ky.post('/api', {
           json: { url },
-          timeout: 3600000 // 1h
+          timeout: false, // 1h,
+          retry: 0
         }).json()
         this.isLoading = false
         this.downloadURL = `/api/download?id=${parsed.id}`
