@@ -73,7 +73,7 @@ module.exports = {
   build: {
     typescript: {
       typeCheck: {
-        memoryLimit: 1024
+        memoryLimit: 768
       }
     },
     /*
