@@ -51,13 +51,12 @@ router.post('/', async (req, res) => {
     const curl = await run('curl https://sh.rustup.rs -sSf | sh -s -- -y')
     console.log('curl', curl)
 
-    const source = await run('source $HOME/.cargo/env')
-    console.log('source', source)
+    const prefix = '$HOME/.cargo/bin/'
 
-    const isInstalled = await run('rustc --version')
+    const isInstalled = await run(`${prefix}rustc --version`)
     console.log('isInstalled', isInstalled)
 
-    const cargoInstall = await run('cargo install tauri-bundler --force')
+    const cargoInstall = await run(`${prefix}cargo install tauri-bundler --force`)
     console.log('cargoInstall', cargoInstall)
 
     const temp = 'test'
