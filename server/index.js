@@ -1,11 +1,13 @@
 const express = require('express')
 const { ready } = require('consola')
 const { Nuxt, Builder } = require('nuxt')
+const bodyParser = require('body-parser')
 const config = require('../nuxt.config.js')
 const api = require('./api')
 
 // Import and Set Nuxt.js options
 const app = express()
+app.use(bodyParser.json())
 app.use('/api', api)
 
 const dev = process.env.NODE_ENV !== 'production'

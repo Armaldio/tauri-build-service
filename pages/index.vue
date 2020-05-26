@@ -5,14 +5,42 @@
   >
     <v-row>
       <v-text-field label="Enter a URL" />
-      <v-btn>Download</v-btn>
+      <v-btn :loading="isLoading" @click="startDownload">
+        Download
+      </v-btn>
+      <div v-if="isLoading">
+        Hold on! It might take a while
+      </div>
     </v-row>
   </v-container>
 </template>
 
-<script lang="ts">
+<script>
+import ky from 'ky/umd'
+
 export default {
-  components: {
+  data () {
+    return {
+      url: '',
+      isLoading: false
+    }
+  },
+  methods: {
+    async startDownload () {
+      try {
+        this.isLoading = true
+        const url = this.url
+        const parsed = await ky.post('/api', {
+          json: { url },
+          timeout: 3600000 // 1h
+        }).json()
+        this.isLoading = false
+
+        console.log('parsed', parsed)
+      } catch (e) {
+        console.error(e)
+      }
+    }
   }
 }
 </script>
