@@ -51,6 +51,12 @@ router.post('/', async (req, res) => {
     const curl = await run('curl https://sh.rustup.rs -sSf | sh -s -- -y')
     console.log('curl', curl)
 
+    const isInstalled = await run('rustc --version')
+    console.log('isInstalled', isInstalled)
+
+    const cargoInstall = await run('cargo install tauri-bundler --force')
+    console.log('cargoInstall', cargoInstall)
+
     const temp = 'test'
     // const temp = nanoid()
     const tempRoot = os.tmpdir()
