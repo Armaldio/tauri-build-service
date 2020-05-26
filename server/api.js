@@ -5,7 +5,6 @@ const express = require('express')
 const router = express.Router()
 const { nanoid } = require('nanoid')
 const fs = require('fs-extra')
-const execa = require('execa')
 
 const run = (cmd, cwd) => {
   return new Promise((resolve) => {
@@ -27,14 +26,22 @@ const run = (cmd, cwd) => {
 
     command.on('exit', (code) => {
       if (code === 0) {
-        console.log('Packages installed successfully')
+        console.log('Command executed without any error')
       } else {
-        console.error(`There was an error installing packages: ${code}`)
+        console.error(`There was an error executing the command "${cmd}": ${code}`)
       }
       resolve(true)
     })
   })
 }
+
+router.get('/download', (req, res) => {
+  const id = req.query.id
+  const tempRoot = os.tmpdir()
+  const newTempPath = path.join(tempRoot, id)
+  const distPath = path.join(newTempPath, 'src-tauri', 'target', 'release', 'app.exe')
+  return res.download(distPath)
+})
 
 router.post('/', async (req, res) => {
   try {
@@ -49,7 +56,7 @@ router.post('/', async (req, res) => {
     console.log('newTempPath', newTempPath)
 
     if (fs.existsSync(newTempPath)) {
-      await fs.emptyDir(newTempPath)
+      // await fs.emptyDir(newTempPath)
     } else {
       await fs.ensureDir(newTempPath)
     }
@@ -76,7 +83,9 @@ router.post('/', async (req, res) => {
 
     const distPath = path.join(newTempPath, 'src-tauri', 'target', 'release', 'app.exe')
 
-    return res.download(distPath)
+    res.json({
+      id: temp
+    })
   } catch (e) {
     return res.json({
       status: 'error',
