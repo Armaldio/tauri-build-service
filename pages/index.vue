@@ -1,9 +1,9 @@
 <template>
   <v-container justify-center align-center>
     <v-row>
-      <v-text-field v-model="url" :disabled="directories.length !== 0" label="Enter a URL">
+      <v-text-field v-model="url" :disabled="isLoading" label="Enter a URL">
         <template #append>
-          <v-btn :disabled="directories.length !== 0 || !url" :loading="isLoading" @click="startDownload">
+          <v-btn :disabled="isLoading || !url" :loading="isLoading" @click="startDownload">
             Generate
           </v-btn>
         </template>
