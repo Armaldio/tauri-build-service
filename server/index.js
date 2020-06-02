@@ -18,8 +18,6 @@ app.get('/download', download)
 
 const dev = process.env.NODE_ENV !== 'production'
 
-console.log('path', process.env)
-
 async function start () {
   // Init Nuxt.js
   const nuxt = new Nuxt(config)
