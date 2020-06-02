@@ -7,7 +7,8 @@ const fs = require('fs-extra')
 const run = (cmd, cwd, socket) => {
   return new Promise((resolve) => {
     const command = exec(cmd, {
-      cwd
+      cwd,
+      env: process.env
     })
 
     command.stdout.setEncoding('utf-8')
