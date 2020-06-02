@@ -95,7 +95,11 @@ const start = async function (socket, url) {
     for (const key in testPaths) {
       const myPath = testPaths[key]
       console.log('testing ', myPath)
-      if (fs.existsSync(path.join(distPath, myPath.path))) {
+      const merged = path.join(distPath, myPath.path)
+      const exist = fs.existsSync(merged)
+      console.log('merge', merged)
+      console.log('exist', exist)
+      if (exist) {
         myPath.id = temp
         directories.push(myPath)
       }
